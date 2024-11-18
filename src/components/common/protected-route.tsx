@@ -8,7 +8,7 @@ interface ProtectedRouteProps {
 }
 
 export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
-  const { token } = useAuth()
+  const { token, isValidToken } = useAuth()
   
   if (token === "loading") {
     return (
@@ -18,8 +18,8 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
     )
   }
 
-  if (!token) {
-    return <Navigate to="/sign-in" />
+  if (!token || !isValidToken()) {
+    return <Navigate to="/sign-in" replace />;
   }
 
   return <>{children}</>

@@ -1,9 +1,13 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
-
+import {jwtDecode} from "jwt-decode";
+interface DecodedToken {
+  exp: number;
+}
 interface AuthContextType {
   token: string | null;
   setToken: (token: string) => void;
   clearToken: () => void;
+  isValidToken: () => boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -15,7 +19,6 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setTokenState] = useState<string | null>("loading");
 
-  // Carregar o token do localStorage quando o componente for montado
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken");
     if (storedToken) {
@@ -35,8 +38,21 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.removeItem("authToken");
   };
 
+  const isValidToken = (): boolean => {
+    if (!token) return false;
+    try {
+      const decoded: DecodedToken = jwtDecode(token);
+      
+      const now = Math.floor(Date.now() / 1000);
+      
+      return decoded.exp > now;
+    } catch (error) {
+      return false;
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ token, setToken, clearToken }}>
+    <AuthContext.Provider value={{ token, setToken, clearToken, isValidToken }}>
       {children}
     </AuthContext.Provider>
   );
