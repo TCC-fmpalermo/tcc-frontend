@@ -1,7 +1,16 @@
+import { useAuth } from "@/contexts/auth-context";
 import { ClipboardList, LogOut, Monitor, MonitorCog, MonitorUp, User, Users } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Sidebar() {
+    const { clearToken } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        clearToken(); 
+        navigate("/sign-in");
+    };
+
     return (
       <div className="flex w-full flex-col bg-muted/40">
         <aside className="fixed inset-y-0 left-0 z-10 w-60 border-r bg-background">
@@ -64,13 +73,13 @@ export function Sidebar() {
                 </Link>
             </nav>
             <hr className="border-muted/70 mt-4"/>
-            <Link
-                to="#"
+            <button
+                onClick={handleLogout}
                 className="flex items-center gap-4 px-6 py-6 text-muted-foreground hover:text-foreground text-red-500"
             >
                 <LogOut className="h-5 w-5" />
                 <span>Sair</span>
-            </Link>
+            </button>
         </aside>
       </div>
     )

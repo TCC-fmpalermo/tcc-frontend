@@ -1,7 +1,6 @@
-import { CreateUserDialog } from "@/components/create-user-dialog";
-import { Sidebar } from "@/components/sidebar";
+import { CreateUserDialog } from "@/components/users/create-user-dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { UsersFilters } from "@/components/users-filters";
+import { UsersFilters } from "@/components/users/users-filters";
 import { getUsers } from "@/data/users";
 import { useQuery } from "@tanstack/react-query";
 
@@ -13,7 +12,7 @@ export function Users() {
 
     return (
         <>
-            <Sidebar />
+            {/* <Sidebar /> */}
             <div className="ml-60 p-4">
                 <h1 className="text-2xl font-bold">Gerenciar Usuários</h1>
                 <hr className="border-muted/70 my-4" />
@@ -38,7 +37,7 @@ export function Users() {
                                         <TableCell>{user.id}</TableCell>
                                         <TableCell>{user.firstName + ' ' + user.lastName}</TableCell>
                                         <TableCell>{user.email}</TableCell>
-                                        <TableCell>{user.role.name}</TableCell>
+                                        <TableCell>{user.role}</TableCell>
                                         <TableCell>{user.createdAt}</TableCell>
                                         <TableCell>{user.status}</TableCell>
                                     </TableRow>

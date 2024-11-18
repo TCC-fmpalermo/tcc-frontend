@@ -2,19 +2,24 @@ import { createBrowserRouter } from "react-router-dom"
 import { Desktops } from "./pages/desktops"
 import { Users } from "./pages/users"
 import { SignIn } from "./pages/sign-in"
-import { ProtectedRoute } from "./components/protected-route"
+import { ProtectedRoute } from "./components/common/protected-route"
+import { AppLayout } from "./components/common/app-layout"
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <ProtectedRoute><Desktops /></ProtectedRoute>,
+        element: <ProtectedRoute><AppLayout/></ProtectedRoute>,
         children: [
             {
-                path: "/desktops",
+                index: true,
                 element: <Desktops />,
             },
             {
-                path: "/users",
+                path: "desktops",
+                element: <Desktops />,
+            },
+            {
+                path: "users",
                 element: <Users />,
             }
         ]
