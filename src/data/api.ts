@@ -1,14 +1,14 @@
 export const API_URL = import.meta.env.VITE_API_URL
 
-type ApiClientOptions = {
+type ApiRequestOptions = {
     method?: string;
     headers?: Record<string, string>;
     body?: unknown;
 };
 
-export async function apiClient<T>(
+export async function apiRequest<T>(
     endpoint: string,
-    { method = "GET", headers = {}, body }: ApiClientOptions = {}
+    { method = "GET", headers = {}, body }: ApiRequestOptions = {}
 ): Promise<T> {
     const token = localStorage.getItem("authToken");
     
