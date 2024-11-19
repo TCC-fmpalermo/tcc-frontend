@@ -4,6 +4,8 @@ import { Users } from "./pages/users"
 import { SignIn } from "./pages/sign-in"
 import { ProtectedRoute } from "./components/common/protected-route"
 import { AppLayout } from "./components/common/app-layout"
+import Forbidden from "./pages/forbidden"
+import { CanAccessRoute } from "./components/common/can-access-route"
 
 export const router = createBrowserRouter([
     {
@@ -15,12 +17,16 @@ export const router = createBrowserRouter([
                 element: <Desktops />,
             },
             {
+                path: "forbidden",
+                element: <Forbidden />,
+            },
+            {
                 path: "desktops",
                 element: <Desktops />,
             },
             {
                 path: "users",
-                element: <Users />,
+                element: <CanAccessRoute permission="create_user"><Users /></CanAccessRoute>,
             }
         ]
     },

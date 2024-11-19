@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 export function Users() {
     const { data: users } = useQuery({
         queryFn: getUsers,
-        queryKey: ['get-users']
+        queryKey: ['get-users'],
     })
 
     return (

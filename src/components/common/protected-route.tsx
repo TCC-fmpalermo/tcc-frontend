@@ -12,9 +12,9 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   
   if (token === "loading") {
     return (
-        <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen">
             <LoadingSpinner size={40}/>
-        </div>
+      </div>
     )
   }
 
