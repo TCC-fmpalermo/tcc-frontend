@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import {jwtDecode} from "jwt-decode";
-interface DecodedToken {
+export interface DecodedToken {
+  permissions: string[];
   exp: number;
 }
 interface AuthContextType {

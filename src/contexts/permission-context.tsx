@@ -7,6 +7,7 @@ type Permissions = Set<Permission>;
 type PermissionsContextType = {
   permissions: Permissions | null;
   isLoading: boolean;
+  setUserPermissions: (permissions: Permissions) => void;
 };
 
 const PermissionsContext = createContext<PermissionsContextType | null>(null);
@@ -35,8 +36,12 @@ export const PermissionsProvider: React.FC<PermissionsProviderProps> = ({ childr
     fetchPermissions();
   }, []);
 
+  const setUserPermissions = (permissions: Permissions) => {
+    setPermissions(permissions);
+  }
+
   return (
-    <PermissionsContext.Provider value={{ permissions, isLoading }}>
+    <PermissionsContext.Provider value={{ permissions, isLoading, setUserPermissions }}>
       {children}
     </PermissionsContext.Provider>
   );
@@ -56,7 +61,7 @@ export const useHasPermission = (permission: Permission): boolean => {
   const { permissions, isLoading } = usePermissions();
 
   if (isLoading || !permissions) {
-    return false; // Retorna false enquanto carrega as permissões
+    return false;
   }
 
   return permissions.has(permission);

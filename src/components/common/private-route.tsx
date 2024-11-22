@@ -3,11 +3,11 @@ import React from "react"
 import { Navigate } from "react-router-dom"
 import { LoadingSpinner } from "../ui/loading-spinner"
 
-interface ProtectedRouteProps {
+interface PrivateRouteProps {
   children: React.ReactNode
 }
 
-export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+export const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
   const { token, isValidToken } = useAuth()
   
   if (token === "loading") {

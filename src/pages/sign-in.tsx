@@ -6,9 +6,11 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "@/data/auth";
-import { useAuth } from "@/contexts/auth-context";
+import { DecodedToken, useAuth } from "@/contexts/auth-context";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import { usePermissions } from "@/contexts/permission-context";
 
 const signInFormSchema = z.object({
     email: z.string().email({ message: 'E-mail inválido' }),
@@ -24,12 +26,15 @@ export function SignIn() {
 
     const navigate = useNavigate();
     const { setToken } = useAuth();
+    const { setUserPermissions } = usePermissions()
     const [ error, setError ] = useState<string | null>(null);
     async function handleSignIn(data: SignInFormSchema) {
         try {
             const res = await signIn(data.email, data.password);
             if (res.token) {
                 setToken(res.token);
+                const decoded: DecodedToken = jwtDecode(res.token);
+                setUserPermissions(new Set(decoded.permissions));
                 navigate('/');
             } else {
                 setError(res.message);
