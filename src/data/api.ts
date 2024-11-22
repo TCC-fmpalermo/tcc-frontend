@@ -6,13 +6,19 @@ type ApiRequestOptions = {
     method?: string;
     headers?: Record<string, string>;
     body?: unknown;
+    queryParams?: Record<string, string>;
 };
 
 export async function apiRequest<T>(
     endpoint: string,
-    { method = "GET", headers = {}, body }: ApiRequestOptions = {}
+    { method = "GET", headers = {}, body, queryParams }: ApiRequestOptions = {}
 ): Promise<T> {
     const token = localStorage.getItem("authToken");
+
+    if (queryParams) {
+        const queryString = new URLSearchParams(queryParams).toString();
+        endpoint = `${endpoint}?${queryString}`;
+    }
     
     const config: RequestInit = {
         method,

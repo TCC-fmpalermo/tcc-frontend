@@ -3,11 +3,18 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { UsersFilters } from "@/components/users/users-filters";
 import { getUsers } from "@/data/users";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "react-router-dom";
 
 export function Users() {
+    const [searchParams] = useSearchParams();
+
+    const search = searchParams.get('search');
+    const role = searchParams.get('role');
+    const status = searchParams.get('status');
+
     const { data: users, refetch } = useQuery({
-        queryFn: getUsers,
-        queryKey: ['get-users'],
+        queryFn: () => getUsers({ search, role, status }),
+        queryKey: ['get-users', search, role, status],
     })
 
     return (

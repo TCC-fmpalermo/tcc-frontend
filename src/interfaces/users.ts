@@ -1,3 +1,9 @@
+export interface GetUsersFilters {
+    search: string | null;
+    role: string | null;
+    status: string | null;
+}
+
 export interface CreateUserData {
     firstName: string;
     lastName: string;

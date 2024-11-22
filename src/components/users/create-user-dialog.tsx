@@ -15,7 +15,6 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { isAPIError } from "@/interfaces/errors";
 
-// Defina o esquema de validação usando Zod
 const createUserSchema = z.object({
     firstName: z.string().min(1, "Nome é obrigatório"),
     lastName: z.string().min(1, "Sobrenome é obrigatório"),
@@ -31,8 +30,10 @@ const createUserSchema = z.object({
 type CreateUserFormValues = z.infer<typeof createUserSchema>;
 
 export function CreateUserDialog({ onUserCreated }: { onUserCreated: () => void }) {
-    const [open, setOpen] = useState(false);
     const canCreateUser = useHasPermission('CREATE_USER');
+
+    const [open, setOpen] = useState(false);
+    
     const { data: roles } = useQuery({
         queryFn: getRoles,
         queryKey: ['get-roles'],
@@ -50,11 +51,9 @@ export function CreateUserDialog({ onUserCreated }: { onUserCreated: () => void 
 
     const onSubmit = async (data: CreateUserFormValues) => {
         try {
-            const response = await createUser(data);
-            console.log("certo", response);
+            await createUser(data);
             onUserCreated();
             toast.success("Usuário criado com sucesso");
-            setOpen(false);
         } catch (error) {
             if(isAPIError(error)) {
                 toast.error("Erro ao criar usuário", {

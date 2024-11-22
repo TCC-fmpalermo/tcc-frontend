@@ -1,8 +1,14 @@
-import { CreateUserData, UserData } from "@/interfaces/users";
+import { CreateUserData, GetUsersFilters, UserData } from "@/interfaces/users";
 import { apiRequest } from "./api";
 
-export const getUsers = async (): Promise<UserData[]> => {
-    return apiRequest<UserData[]>("/users");
+export const getUsers = async ({ search, role, status }: GetUsersFilters): Promise<UserData[]> => {
+    return apiRequest<UserData[]>("/users", { 
+        queryParams: { 
+            search: search || "", 
+            role: role || "", 
+            status: status || "" 
+        } 
+    });
 };
 
 export const createUser = async (user: CreateUserData): Promise<UserData> => {
@@ -10,4 +16,8 @@ export const createUser = async (user: CreateUserData): Promise<UserData> => {
         method: "POST",
         body: user,
     });
+}
+
+export const getUserStatusOptions = async (): Promise<string[]> => {
+    return apiRequest<string[]>("/users/status/all");
 }
