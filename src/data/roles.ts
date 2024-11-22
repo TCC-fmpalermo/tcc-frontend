@@ -1,6 +1,6 @@
-import { RoleData } from "@/interfaces/roles";
+import { GetRoleData } from "@/interfaces/roles";
 import { apiRequest } from "./api";
 
-export const getRoles = async (): Promise<RoleData[]> => {
-    return apiRequest<RoleData[]>("/roles");
+export const getRoles = async (): Promise<GetRoleData[]> => {
+    return apiRequest<GetRoleData[]>("/roles");
 };

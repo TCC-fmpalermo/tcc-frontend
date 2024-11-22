@@ -1,4 +1,4 @@
-export interface RoleData {
+export interface GetRoleData {
     value: string;
     alias: string;
 }

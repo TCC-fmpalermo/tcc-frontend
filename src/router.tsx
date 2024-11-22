@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom"
 import { Desktops } from "./pages/desktops"
-import { Users } from "./pages/users"
+import { ManageUsers } from "./pages/manage-users"
 import { SignIn } from "./pages/sign-in"
 import { PrivateRoute } from "./components/common/private-route"
 import { AppLayout } from "./components/common/app-layout"
@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "users",
-                element: <CanAccessRoute permission="VIEW_USERS"><Users /></CanAccessRoute>,
+                element: <CanAccessRoute permission="VIEW_USERS"><ManageUsers /></CanAccessRoute>,
             }
         ]
     },

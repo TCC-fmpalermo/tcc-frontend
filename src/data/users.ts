@@ -1,8 +1,8 @@
-import { CreateUserData, GetUsersFilters, UserData } from "@/interfaces/users";
+import { CreateUserData, GetUsersFilters, GetUserData, UpdateUserData } from "@/interfaces/users";
 import { apiRequest } from "./api";
 
-export const getUsers = async ({ search, role, status }: GetUsersFilters): Promise<UserData[]> => {
-    return apiRequest<UserData[]>("/users", { 
+export const getUsers = async ({ search, role, status }: GetUsersFilters): Promise<GetUserData[]> => {
+    return apiRequest<GetUserData[]>("/users", { 
         queryParams: { 
             search: search || "", 
             role: role || "", 
@@ -11,9 +11,16 @@ export const getUsers = async ({ search, role, status }: GetUsersFilters): Promi
     });
 };
 
-export const createUser = async (user: CreateUserData): Promise<UserData> => {
-    return apiRequest<UserData>("/users", {
+export const createUser = async (user: CreateUserData): Promise<GetUserData> => {
+    return apiRequest<GetUserData>("/users", {
         method: "POST",
+        body: user,
+    });
+}
+
+export const updateUser = async (id: number, user: UpdateUserData): Promise<GetUserData> => {
+    return apiRequest<GetUserData>(`/users/${id}`, {
+        method: "PATCH",
         body: user,
     });
 }

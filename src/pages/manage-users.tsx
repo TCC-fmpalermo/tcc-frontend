@@ -4,8 +4,9 @@ import { UsersFilters } from "@/components/users/users-filters";
 import { getUsers } from "@/data/users";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
+import { EditUserDialog } from "@/components/users/edit-user-dialog";
 
-export function Users() {
+export function ManageUsers() {
     const [searchParams] = useSearchParams();
 
     const search = searchParams.get('search');
@@ -35,6 +36,7 @@ export function Users() {
                             <TableHead>Cargo</TableHead>
                             <TableHead>Data de Criação</TableHead>
                             <TableHead>Status</TableHead>
+                            <TableHead>Ações</TableHead>
                         </TableHeader>
                         <TableBody>
                             {users?.map((user) => (
@@ -42,9 +44,14 @@ export function Users() {
                                     <TableCell>{user.id}</TableCell>
                                     <TableCell>{user.firstName + ' ' + user.lastName}</TableCell>
                                     <TableCell>{user.email}</TableCell>
-                                    <TableCell>{user.role}</TableCell>
+                                    <TableCell>{user.role.alias}</TableCell>
                                     <TableCell>{user.createdAt}</TableCell>
                                     <TableCell>{user.status}</TableCell>
+                                    <TableCell>
+                                        <div className="flex items-center gap-1.5">
+                                            <EditUserDialog user={user} onUserUpdated={refetch} />
+                                        </div>
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

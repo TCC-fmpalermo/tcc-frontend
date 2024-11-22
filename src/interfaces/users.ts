@@ -1,3 +1,5 @@
+import { GetRoleData } from "./roles";
+
 export interface GetUsersFilters {
     search: string | null;
     role: string | null;
@@ -12,12 +14,20 @@ export interface CreateUserData {
     confirmPassword: string;
     role: string;
 }
-export interface UserData {
+export interface GetUserData {
     id: number;
     firstName: string;
     lastName: string;
     email: string;
-    role: string;
+    role: GetRoleData;
     createdAt: string;
+    status: string;
+}
+
+export interface UpdateUserData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    role: string;
     status: string;
 }
