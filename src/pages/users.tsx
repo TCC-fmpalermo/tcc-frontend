@@ -5,7 +5,7 @@ import { getUsers } from "@/data/users";
 import { useQuery } from "@tanstack/react-query";
 
 export function Users() {
-    const { data: users } = useQuery({
+    const { data: users, refetch } = useQuery({
         queryFn: getUsers,
         queryKey: ['get-users'],
     })
@@ -17,7 +17,7 @@ export function Users() {
             <div className="px-8">
                 <div className="flex items-center justify-between">
                     <UsersFilters />
-                    <CreateUserDialog />
+                    <CreateUserDialog onUserCreated={refetch}/>
                 </div>
                 <div className="mt-4 border rounded-lg p-2">
                     <Table>

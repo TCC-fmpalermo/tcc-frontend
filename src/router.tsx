@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "users",
-                element: <CanAccessRoute permission="create_user"><Users /></CanAccessRoute>,
+                element: <CanAccessRoute permission="VIEW_USERS"><Users /></CanAccessRoute>,
             }
         ]
     },

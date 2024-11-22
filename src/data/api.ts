@@ -1,3 +1,5 @@
+import { APIError } from "@/interfaces/errors";
+
 export const API_URL = import.meta.env.VITE_API_URL
 
 type ApiRequestOptions = {
@@ -26,6 +28,11 @@ export async function apiRequest<T>(
     }
 
     const response = await fetch(API_URL + endpoint, config);
+
+    if(!response.ok) {
+        const error: APIError = await response.json();
+        throw error;
+    }
 
     return response.json() as Promise<T>;
 }
