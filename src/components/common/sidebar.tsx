@@ -1,5 +1,5 @@
 import { useAuth } from "@/contexts/auth-context";
-import { ClipboardList, LogOut, Monitor, MonitorCog, MonitorUp, User, Users } from "lucide-react";
+import { ClipboardList, LogOut, Monitor, MonitorCheck, MonitorCog, MonitorUp, User, Users } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 export function Sidebar() {
@@ -25,7 +25,7 @@ export function Sidebar() {
             <nav className="grid gap-4 px-4 grow">
                 <h3> Acesso Rápido </h3>
                 <Link 
-                    to="#"
+                    to="/new-desktop"
                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
                     <MonitorUp className="h-5 w-5" />
@@ -60,8 +60,8 @@ export function Sidebar() {
                     to="#"
                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                    <MonitorCog className="h-5 w-5" />
-                    <span>Gerenciar Opções</span>
+                    <MonitorCheck className="h-5 w-5" />
+                    <span>Opções de Desktops</span>
                 </Link>
 
                 <Link 

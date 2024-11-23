@@ -6,6 +6,7 @@ import { PrivateRoute } from "./components/common/private-route"
 import { AppLayout } from "./components/common/app-layout"
 import Forbidden from "./pages/forbidden"
 import { CanAccessRoute } from "./components/common/can-access-route"
+import { NewDesktop } from "./pages/new-desktop"
 
 export const router = createBrowserRouter([
     {
@@ -17,17 +18,21 @@ export const router = createBrowserRouter([
                 element: <Desktops />,
             },
             {
-                path: "forbidden",
-                element: <Forbidden />,
+                path: "my-desktops",
+                element: <Desktops />,
             },
             {
-                path: "desktops",
-                element: <Desktops />,
+                path: "new-desktop",
+                element: <NewDesktop />,
             },
             {
                 path: "users",
                 element: <CanAccessRoute permission="VIEW_USERS"><ManageUsers /></CanAccessRoute>,
-            }
+            },
+            {
+                path: "forbidden",
+                element: <Forbidden />,
+            },
         ]
     },
     {
