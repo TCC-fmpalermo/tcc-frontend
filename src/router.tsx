@@ -7,6 +7,7 @@ import { AppLayout } from "./components/common/app-layout"
 import Forbidden from "./pages/forbidden"
 import { CanAccessRoute } from "./components/common/can-access-route"
 import { NewDesktop } from "./pages/new-desktop"
+import { DesktopOptions } from "./pages/desktop-options"
 
 export const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
             {
                 path: "new-desktop",
                 element: <NewDesktop />,
+            },
+            {
+                path: "desktop-options",
+                element: <DesktopOptions />
             },
             {
                 path: "users",

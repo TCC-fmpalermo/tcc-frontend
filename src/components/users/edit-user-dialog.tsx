@@ -13,6 +13,7 @@ import { Edit } from "lucide-react";
 import { useState } from "react";
 import { getUserStatusOptions, updateUser } from "@/data/users";
 import { isAPIError } from "@/interfaces/errors";
+import { GetUserData } from "@/interfaces/users";
 
 const editUserSchema = z.object({
     firstName: z.string().min(1, "Nome é obrigatório"),
@@ -24,7 +25,7 @@ const editUserSchema = z.object({
 
 type EditUserFormValues = z.infer<typeof editUserSchema>;
 
-export function EditUserDialog({ user, onUserUpdated }: { user: any; onUserUpdated: () => void }) {
+export function EditUserDialog({ user, onUserUpdated }: { user: GetUserData; onUserUpdated: () => void }) {
     const [open, setOpen] = useState(false);
     
     const {

@@ -1,13 +1,18 @@
 
-interface FlavorsSpecs {
+export interface FlavorsSpecs {
     id: string,
     name: string,
     vcpus: string,
     ram: string
 }
-export interface getDesktopOptionData {
+
+export interface ImageInfo {
+    id: string,
+    name: string,
+    size: string
+}
+export interface GetDesktopOptionData {
     id: number,
-    operatingSystem: string,
     description: string,
     size: string,
     openstackFlavorId: string,
@@ -15,4 +20,13 @@ export interface getDesktopOptionData {
     autoApproved: boolean,
     status: string,
     flavorSpecs: FlavorsSpecs
+    imageInfo: ImageInfo
+}
+
+export interface CreateDesktopOptionData {
+    description?: string,
+    size: number,
+    openstackFlavorId: string,
+    openstackImageId: string,
+    autoApproved: boolean
 }

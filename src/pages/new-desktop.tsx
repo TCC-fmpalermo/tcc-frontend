@@ -30,7 +30,7 @@ export function NewDesktop() {
                   <Card key={desktop.id} className="my-4 p-4">
                       <CardHeader className="flex items-center justify-between">
                           <CardTitle className="text-lg font-semibold">
-                              {desktop.operatingSystem}
+                              {desktop.imageInfo.name}
                           </CardTitle>
                           <Monitor className="h-16 w-16 text-muted" />
                       </CardHeader>
