@@ -7,9 +7,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Monitor } from "lucide-react";
 
 export function NewDesktop() {
+    const status = "Ativo";
     const { data: desktopOptions, isLoading } = useQuery({
-        queryFn: () => getDesktopOptions({ status: "Ativo" }),
-        queryKey: ['get-desktop-options'],
+        queryFn: () => getDesktopOptions({ status }),
+        queryKey: ['get-desktop-options', status],
     })
     
     if (isLoading) {
