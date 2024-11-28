@@ -1,9 +1,10 @@
-import { Button } from "@/components/ui/button";
+import { CreateDesktopDialog } from "@/components/new-desktop/create-desktop-dialog";
+import { CreateRequestDialog } from "@/components/new-desktop/create-request-dialog";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { getDesktopOptions } from "@/data/desktop-options";
 import { useQuery } from "@tanstack/react-query";
-import { Monitor, MonitorUp } from "lucide-react";
+import { Monitor } from "lucide-react";
 
 export function NewDesktop() {
     const { data: desktopOptions, isLoading } = useQuery({
@@ -45,10 +46,8 @@ export function NewDesktop() {
                             <p className="text-sm text-muted-foreground">
                                 {desktop.autoApproved ? "Aprovado automaticamente" : "Necessita de aprovação de um administrador"}
                             </p>
-                            <Button>
-                                <MonitorUp className="mr-2 h-4 w-4" />
-                                Selecionar
-                            </Button>
+                            {desktop.autoApproved ? (<CreateDesktopDialog />) : (<CreateRequestDialog />)}
+                            
                         </div>
                       </CardFooter>
                   </Card>
