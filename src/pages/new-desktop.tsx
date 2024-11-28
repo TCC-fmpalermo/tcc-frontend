@@ -8,7 +8,7 @@ import { Monitor } from "lucide-react";
 
 export function NewDesktop() {
     const { data: desktopOptions, isLoading } = useQuery({
-        queryFn: getDesktopOptions,
+        queryFn: () => getDesktopOptions({ status: "Ativo" }),
         queryKey: ['get-desktop-options'],
     })
     

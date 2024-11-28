@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export function DesktopOptions() {
     const { data: desktopOptions, refetch } = useQuery({
-        queryFn: () => getDesktopOptions(),
+        queryFn: () => getDesktopOptions({}),
         queryKey: ['get-desktop-options'],
     })
     return (
@@ -51,7 +51,8 @@ export function DesktopOptions() {
                                                     openstackFlavorId: desktopOption.flavorSpecs.id,
                                                     size: +desktopOption.size.split(' ')[0],
                                                     autoApproved: desktopOption.autoApproved,
-                                                    description: desktopOption.description
+                                                    description: desktopOption.description,
+                                                    status: desktopOption.status
                                                 }
                                             } 
                                             onOptionUpdated={refetch}

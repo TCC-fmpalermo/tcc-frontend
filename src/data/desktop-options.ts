@@ -1,8 +1,8 @@
-import { CreateDesktopOptionData, FlavorsSpecs, GetDesktopOptionData, ImageInfo } from "@/interfaces/desktop-options";
+import { CreateDesktopOptionData, FlavorsSpecs, GetDesktopOptionData, GetDesktopOptionFilters, ImageInfo } from "@/interfaces/desktop-options";
 import { apiRequest } from "./api";
 
-export const getDesktopOptions = async (): Promise<GetDesktopOptionData[]> => {
-    return apiRequest<GetDesktopOptionData[]>("/desktop-options");
+export const getDesktopOptions = async ({ status }: GetDesktopOptionFilters): Promise<GetDesktopOptionData[]> => {
+    return apiRequest<GetDesktopOptionData[]>("/desktop-options", { queryParams: { status: status || "" } });
 }
 
 export const getImageOptions = async (): Promise<ImageInfo[]> => {
@@ -25,4 +25,8 @@ export const updateDesktopOption = async (id: number, data: CreateDesktopOptionD
         method: "PATCH",
         body: data,
     });
+}
+
+export const getDesktopOptionStatusOptions = async (): Promise<string[]> => { 
+    return apiRequest<string[]>("/desktop-options/status/all");
 }

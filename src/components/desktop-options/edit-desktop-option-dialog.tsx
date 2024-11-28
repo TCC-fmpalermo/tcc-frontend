@@ -9,7 +9,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { toast } from "sonner";
-import { updateDesktopOption, getFlavorOptions, getImageOptions } from "@/data/desktop-options";
+import { updateDesktopOption, getFlavorOptions, getImageOptions, getDesktopOptionStatusOptions } from "@/data/desktop-options";
 import { isAPIError } from "@/interfaces/errors";
 import { Edit } from "lucide-react";
 
@@ -18,6 +18,7 @@ const editDesktopOptionSchema = z.object({
     openstackFlavorId: z.string().min(1, "O flavor é obrigatório"),
     size: z.number().min(1, "O tamanho do volume deve ser maior que 0"),
     autoApproved: z.boolean(),
+    status: z.string().min(1, "O status é obrigatório"),
     description: z.string().optional(),
 });
 
@@ -34,6 +35,11 @@ export function EditDesktopOptionDialog({ desktopOptionId, option, onOptionUpdat
     const { data: flavorOptions } = useQuery({
         queryKey: ["flavor-options"], 
         queryFn: getFlavorOptions,
+    });
+
+    const { data: statusOptions } = useQuery({
+        queryFn: getDesktopOptionStatusOptions,
+        queryKey: ['get-desktop-option-status-options'],
     });
 
     const {
@@ -155,6 +161,24 @@ export function EditDesktopOptionDialog({ desktopOptionId, option, onOptionUpdat
                             <SelectContent>
                                 <SelectItem value="true">Sim</SelectItem>
                                 <SelectItem value="false">Não</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                    <div className="grid w-full max-w-sm items-center gap-1.5">
+                        <Label htmlFor="status">Status</Label>
+                        <Select
+                            defaultValue={option.status}
+                            onValueChange={(value) => setValue("status", value)}
+                        >
+                            <SelectTrigger>
+                                <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {statusOptions?.map((option) => (
+                                    <SelectItem key={option} value={option}>
+                                        {option}
+                                    </SelectItem>
+                                ))}
                             </SelectContent>
                         </Select>
                     </div>

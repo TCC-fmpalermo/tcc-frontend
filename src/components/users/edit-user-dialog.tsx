@@ -48,7 +48,7 @@ export function EditUserDialog({ user, onUserUpdated }: { user: GetUserData; onU
 
     const { data: statusOptions } = useQuery({
         queryFn: getUserStatusOptions,
-        queryKey: ['get-status-options'],
+        queryKey: ['get-user-status-options'],
     });
 
     const onSubmit = async (data: EditUserFormValues) => {

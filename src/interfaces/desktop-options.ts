@@ -23,6 +23,10 @@ export interface GetDesktopOptionData {
     imageInfo: ImageInfo
 }
 
+export interface GetDesktopOptionFilters {
+    status?: string
+}
+
 export interface CreateDesktopOptionData {
     description?: string,
     size: number,
