@@ -19,6 +19,7 @@ const createDesktopOptionSchema = z.object({
     size: z.number().min(1, "O tamanho do volume deve ser maior que 0"),
     autoApproved: z.boolean(),
     description: z.string().optional(),
+    defaultUsername: z.string().min(1, "O username é obrigatório"),
 });
 
 type CreateDesktopOptionFormValues = z.infer<typeof createDesktopOptionSchema>;
@@ -112,6 +113,18 @@ export function CreateDesktopOptionDialog({ onOptionCreated }: { onOptionCreated
                         </Select>
                         {errors.openstackImageId && (
                             <p className="text-red-500 text-sm">{errors.openstackImageId.message}</p>
+                        )}
+                    </div>
+                    <div className="grid w-full max-w-sm items-center gap-1.5">
+                        <Label htmlFor="defaultUsername">Usuário padrão do desktop (ex: ubuntu)</Label>
+                        <Input
+                            type="text"
+                            id="defaultUsername"
+                            placeholder="Usuario padrão"
+                            {...register("defaultUsername")}
+                        />
+                        {errors.defaultUsername && (
+                            <p className="text-red-500 text-sm">{errors.defaultUsername.message}</p>
                         )}
                     </div>
                     <div className="grid w-full max-w-sm items-center gap-1.5">

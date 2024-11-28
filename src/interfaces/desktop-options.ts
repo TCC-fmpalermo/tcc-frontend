@@ -19,6 +19,7 @@ export interface GetDesktopOptionData {
     openstackImageId: string
     autoApproved: boolean,
     status: string,
+    defaultUsername: string,
     flavorSpecs: FlavorsSpecs
     imageInfo: ImageInfo
 }
@@ -32,5 +33,6 @@ export interface CreateDesktopOptionData {
     size: number,
     openstackFlavorId: string,
     openstackImageId: string,
-    autoApproved: boolean
+    autoApproved: boolean,
+    defaultUsername: string
 }

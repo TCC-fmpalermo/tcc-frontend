@@ -20,6 +20,7 @@ const editDesktopOptionSchema = z.object({
     autoApproved: z.boolean(),
     status: z.string().min(1, "O status é obrigatório"),
     description: z.string().optional(),
+    defaultUsername: z.string().min(1, "O usuário é obrigatório"),
 });
 
 type EditDesktopOptionFormValues = z.infer<typeof editDesktopOptionSchema>;
@@ -114,6 +115,18 @@ export function EditDesktopOptionDialog({ desktopOptionId, option, onOptionUpdat
                         </Select>
                         {errors.openstackImageId && (
                             <p className="text-red-500 text-sm">{errors.openstackImageId.message}</p>
+                        )}
+                    </div>
+                    <div className="grid w-full max-w-sm items-center gap-1.5">
+                        <Label htmlFor="defaultUsername">Usuário padrão do desktop (ex: ubuntu)</Label>
+                        <Input
+                            type="text"
+                            id="defaultUsername"
+                            placeholder="Usuario padrão"
+                            {...register("defaultUsername")}
+                        />
+                        {errors.defaultUsername && (
+                            <p className="text-red-500 text-sm">{errors.defaultUsername.message}</p>
                         )}
                     </div>
                     <div className="grid w-full max-w-sm items-center gap-1.5">

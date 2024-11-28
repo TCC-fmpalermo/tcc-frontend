@@ -22,6 +22,7 @@ export function DesktopOptions() {
                     <TableHeader>
                         <TableHead>ID</TableHead>
                         <TableHead>Nome da Imagem</TableHead>
+                        <TableHead>Usuário Padrão da Imagem</TableHead>
                         <TableHead>Flavor</TableHead>
                         <TableHead>CPUs</TableHead>
                         <TableHead>RAM</TableHead>
@@ -35,6 +36,7 @@ export function DesktopOptions() {
                             <TableRow key={desktopOption.id}>
                                 <TableCell>{desktopOption.id}</TableCell>
                                 <TableCell>{desktopOption.imageInfo.name}</TableCell>
+                                <TableCell>{desktopOption.defaultUsername}</TableCell>
                                 <TableCell>{desktopOption.flavorSpecs.name}</TableCell>
                                 <TableCell>{desktopOption.flavorSpecs.vcpus}</TableCell>
                                 <TableCell>{desktopOption.flavorSpecs.ram}</TableCell>
@@ -52,7 +54,8 @@ export function DesktopOptions() {
                                                     size: +desktopOption.size.split(' ')[0],
                                                     autoApproved: desktopOption.autoApproved,
                                                     description: desktopOption.description,
-                                                    status: desktopOption.status
+                                                    status: desktopOption.status,
+                                                    defaultUsername: desktopOption.defaultUsername
                                                 }
                                             } 
                                             onOptionUpdated={refetch}
