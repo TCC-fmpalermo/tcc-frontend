@@ -143,7 +143,7 @@ export function CreateDesktopDialog({ desktopOptionId }: { desktopOptionId: numb
                         <div className="grid w-full items-center gap-1.5 col-span-2">
                             <Label>Progresso</Label>
                             <Progress className="col-span-2" value={progress} />
-                            <p >{statusProgress}</p>
+                            <p className="text-sm">{statusProgress}</p>
                         </div>
                     )}
                     <DialogFooter className="col-span-2">

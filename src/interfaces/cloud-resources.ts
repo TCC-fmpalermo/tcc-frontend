@@ -1,21 +1,18 @@
+import { ImageInfo } from "./desktop-options";
+
 export interface InstanceData {
     id: number;
-    name: string;
-    ipAddress: string;
-    username: string;
-    password: string;
-    openstackInstanceId: string;
+    cpus: string;
+    ram: string;
 }
 
 export interface VolumeData {
     id: number;
-    operatingSystem: string;
     size: number;
-    openstackVolumeId: string;
-    openstackImageId: string;
+    imageInfo: ImageInfo;
 }
 
-export interface getCloudResourcesData {
+export interface GetCloudResourcesData {
     id: number;
     alias: string;
     createdAt: Date;
@@ -29,7 +26,22 @@ export interface getCloudResourcesData {
     volume: VolumeData;
 }
 
+export interface GetUserCloudResourcesData {
+    id: number;
+    alias: string;
+    createdAt: string;
+    updatedAt: string;
+    lastAccessedAt: string;
+    status: string;
+    instance: InstanceData;
+    volume: VolumeData;
+}
+
 export interface CreateCloudResourceData {
     alias: string;
     desktopOptionId: number;
+}
+
+export interface UpdateCloudResourceData {
+    alias: string;
 }

@@ -1,13 +1,24 @@
-import { CreateCloudResourceData, getCloudResourcesData } from "@/interfaces/cloud-resources";
+import { CreateCloudResourceData, GetCloudResourcesData, GetUserCloudResourcesData, UpdateCloudResourceData } from "@/interfaces/cloud-resources";
 import { API_URL, apiRequest } from "./api";
 
-export const getCloudResources = async (): Promise<getCloudResourcesData[]> => {
-    return apiRequest<getCloudResourcesData[]>("/cloud-resources");
+export const getCloudResources = async (): Promise<GetCloudResourcesData[]> => {
+    return apiRequest<GetCloudResourcesData[]>("/cloud-resources");
+}
+
+export const getUserCloudResources = async (): Promise<GetUserCloudResourcesData[]> => {
+    return apiRequest<GetUserCloudResourcesData[]>("/cloud-resources/mine");
 }
 
 export const createCloudResource = async (data: CreateCloudResourceData) => {
     return apiRequest<CreateCloudResourceData>("/cloud-resources", {
         method: "POST",
+        body: data
+    })
+}
+
+export const updateCloudResource = async (id: number, data: UpdateCloudResourceData) => {
+    return apiRequest<UpdateCloudResourceData>(`/cloud-resources/${id}`, {
+        method: "PATCH",
         body: data
     })
 }

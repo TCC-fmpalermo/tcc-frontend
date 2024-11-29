@@ -8,6 +8,7 @@ import Forbidden from "./pages/forbidden"
 import { CanAccessRoute } from "./components/common/can-access-route"
 import { NewDesktop } from "./pages/new-desktop"
 import { DesktopOptions } from "./pages/desktop-options"
+import { MyDesktops } from "./pages/my-desktops"
 
 export const router = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "my-desktops",
-                element: <Desktops />,
+                element: <MyDesktops />,
             },
             {
                 path: "new-desktop",

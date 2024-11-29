@@ -34,7 +34,7 @@ export function Sidebar() {
 
                 <h3 className="py-2"> Gerenciamento </h3>
                 <Link 
-                    to="#"
+                    to="/my-desktops"
                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
                     <Monitor className="h-5 w-5" />
