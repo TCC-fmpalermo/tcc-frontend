@@ -1,11 +1,14 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import {jwtDecode} from "jwt-decode";
+import { set } from "react-hook-form";
 export interface DecodedToken {
   permissions: string[];
+  id: number;
   exp: number;
 }
 interface AuthContextType {
   token: string | null;
+  userData: DecodedToken | null;
   setToken: (token: string) => void;
   clearToken: () => void;
   isValidToken: () => boolean;
@@ -19,11 +22,13 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setTokenState] = useState<string | null>("loading");
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken");
     if (storedToken) {
       setTokenState(storedToken);
+      setUserData(jwtDecode(storedToken));
     } else {
       setTokenState(null);
     }
@@ -31,11 +36,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const setToken = (token: string) => {
     setTokenState(token);
+    setUserData(jwtDecode(token));
     localStorage.setItem("authToken", token);
   };
 
   const clearToken = () => {
     setTokenState(null);
+    setUserData(null);
     localStorage.removeItem("authToken");
   };
 
@@ -53,7 +60,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, setToken, clearToken, isValidToken }}>
+    <AuthContext.Provider value={{ token, userData, setToken, clearToken, isValidToken }}>
       {children}
     </AuthContext.Provider>
   );

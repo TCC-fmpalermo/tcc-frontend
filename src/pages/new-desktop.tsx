@@ -47,7 +47,7 @@ export function NewDesktop() {
                             <p className="text-sm text-muted-foreground">
                                 {desktop.autoApproved ? "Aprovado automaticamente" : "Necessita de aprovação de um administrador"}
                             </p>
-                            {desktop.autoApproved ? (<CreateDesktopDialog />) : (<CreateRequestDialog />)}
+                            {desktop.autoApproved ? (<CreateDesktopDialog desktopOptionId={desktop.id} />) : (<CreateRequestDialog />)}
                             
                         </div>
                       </CardFooter>
