@@ -37,6 +37,10 @@ export interface GetUserCloudResourcesData {
     volume: VolumeData;
 }
 
+export interface GetCloudResourceAccessTokenData {
+    token: string;
+}
+
 export interface CreateCloudResourceData {
     alias: string;
     desktopOptionId: number;

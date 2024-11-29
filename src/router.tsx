@@ -9,6 +9,7 @@ import { CanAccessRoute } from "./components/common/can-access-route"
 import { NewDesktop } from "./pages/new-desktop"
 import { DesktopOptions } from "./pages/desktop-options"
 import { MyDesktops } from "./pages/my-desktops"
+import { AccessDesktop } from "./pages/access-desktop"
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
                 element: <Forbidden />,
             },
         ]
+    },
+    {
+        path: "/access-desktop",
+        element: <PrivateRoute><AccessDesktop /></PrivateRoute>,
     },
     {
         path: "/sign-in",

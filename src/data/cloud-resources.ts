@@ -1,4 +1,4 @@
-import { CreateCloudResourceData, GetCloudResourcesData, GetUserCloudResourcesData, UpdateCloudResourceData } from "@/interfaces/cloud-resources";
+import { CreateCloudResourceData, GetCloudResourceAccessTokenData, GetCloudResourcesData, GetUserCloudResourcesData, UpdateCloudResourceData } from "@/interfaces/cloud-resources";
 import { API_URL, apiRequest } from "./api";
 
 export const getCloudResources = async (): Promise<GetCloudResourcesData[]> => {
@@ -14,6 +14,10 @@ export const createCloudResource = async (data: CreateCloudResourceData) => {
         method: "POST",
         body: data
     })
+}
+
+export const getCloudReourceAccessToken = async (id: number): Promise<GetCloudResourceAccessTokenData> => {
+    return apiRequest<GetCloudResourceAccessTokenData>(`/cloud-resources/${id}/token`)
 }
 
 export const updateCloudResource = async (id: number, data: UpdateCloudResourceData) => {

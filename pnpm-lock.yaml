@@ -28,6 +28,9 @@ dependencies:
   '@tanstack/react-query':
     specifier: ^5.60.5
     version: 5.60.5(react@18.3.1)
+  '@types/guacamole-common-js':
+    specifier: ^1.5.2
+    version: 1.5.2
   axios:
     specifier: ^1.7.7
     version: 1.7.7
@@ -40,6 +43,9 @@ dependencies:
   dotenv:
     specifier: ^16.4.5
     version: 16.4.5
+  guacamole-common-js:
+    specifier: ^1.5.0
+    version: 1.5.0
   jwt-decode:
     specifier: ^4.0.0
     version: 4.0.0
@@ -1464,6 +1470,10 @@ packages:
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
     dev: true
 
+  /@types/guacamole-common-js@1.5.2:
+    resolution: {integrity: sha512-S01txydRyBscHyV8giYNdrfU7dzwUkLb8prQPP68/YCpY/gMtcL9e7BXGpQttj4XpelSUVkA++TjllalZ0AHjg==}
+    dev: false
+
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
     dev: true
@@ -2214,6 +2224,10 @@ packages:
   /graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
+
+  /guacamole-common-js@1.5.0:
+    resolution: {integrity: sha512-zxztif3GGhKbg1RgOqwmqot8kXgv2HmHFg1EvWwd4q7UfEKvBcYZ0f+7G8HzvU+FUxF0Psqm9Kl5vCbgfrRgJg==}
+    dev: false
 
   /has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}

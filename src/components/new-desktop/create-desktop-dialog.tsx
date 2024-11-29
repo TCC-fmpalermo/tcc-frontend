@@ -81,6 +81,7 @@ export function CreateDesktopDialog({ desktopOptionId }: { desktopOptionId: numb
             toast.success("Desktop criado com sucesso!");
         } catch (error) {
             setProgress(0);
+            setCreated(false);
             setListenProgress(false);
             setStatusProgress('');
             if(isAPIError(error)) {
