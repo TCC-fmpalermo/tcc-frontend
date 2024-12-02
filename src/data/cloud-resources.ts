@@ -37,17 +37,17 @@ export const updateCloudResourceStatus = async (id: number, status: string) => {
 export async function getCloudResourceProgress<T>(
     onMessage: (message: T) => void,
     onError?: (error: Error) => void
-  ) {
+) {
     try {
       const token = localStorage.getItem("authToken");
       
       const eventSource = new EventSource(`${API_URL}/cloud-resources/progress?token=${token}`);
-  
+
       eventSource.onmessage = (event) => {
         const data: T = JSON.parse(event.data);
         onMessage(data);
       };
-  
+
       eventSource.onerror = (error) => {
         console.error("Erro no SSE:", error);
         if (onError) {
@@ -55,7 +55,7 @@ export async function getCloudResourceProgress<T>(
         }
         eventSource.close();
       };
-  
+
       return () => eventSource.close(); // Retorna uma função para encerrar a conexão quando não for mais necessária
     } catch (error) {
       console.error("Erro ao conectar ao SSE:", error);
@@ -63,5 +63,11 @@ export async function getCloudResourceProgress<T>(
         onError(error as Error);
       }
     }
-  }
+}
+
+export const deleteCloudResource = async (id: number) => {
+    return apiRequest(`/cloud-resources/${id}`, {
+        method: "DELETE"
+    })
+}
   

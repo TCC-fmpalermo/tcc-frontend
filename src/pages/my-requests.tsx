@@ -1,5 +1,6 @@
 import { DeleteDesktopRequestDialog } from "@/components/desktop-requests/delete-desktop-request-dialog";
 import { DesktopRequestDetailsDialog } from "@/components/desktop-requests/desktop-request-details-dialog";
+import { CreateDesktopDialog } from "@/components/new-desktop/create-desktop-dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useAuth } from "@/contexts/auth-context";
 import { getUserDesktopRequests } from "@/data/desktop-requests"
@@ -50,6 +51,9 @@ export function MyRequests() {
                                         <DesktopRequestDetailsDialog details={desktopRequest} />
                                         {desktopRequest.status === 'Pendente' && (
                                             <DeleteDesktopRequestDialog desktopRequestId={desktopRequest.id} onDelete={refetch} />
+                                        )}
+                                        {desktopRequest.status === 'Aprovado' && (
+                                            <CreateDesktopDialog desktopOptionId={desktopRequest.desktopOption.id} iconOption={true} />
                                         )}
                                     </div>
                                 </TableCell>

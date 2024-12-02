@@ -19,7 +19,7 @@ const desktopSchema = z.object({
 
 type DesktopFormData = z.infer<typeof desktopSchema>;
   
-export function CreateDesktopDialog({ desktopOptionId }: { desktopOptionId: number }) {
+export function CreateDesktopDialog({ desktopOptionId, iconOption = false }: { desktopOptionId: number, iconOption?: boolean }) {
     const [open, setOpen] = useState(false);
     const [listenProgress, setListenProgress] = useState(false);
     const [created, setCreated] = useState(false);
@@ -113,10 +113,16 @@ export function CreateDesktopDialog({ desktopOptionId }: { desktopOptionId: numb
     return (
         <Dialog open={open} onOpenChange={onOpenModal}>
             <DialogTrigger asChild>
-                <Button>
-                    <MonitorUp className="mr-2 h-4 w-4" />
-                    Selecionar
-                </Button>
+                {iconOption ? (
+                    <Button variant="ghost">
+                        <MonitorUp className="mr-2 h-4 w-4" />
+                    </Button>
+                ):(
+                    <Button>
+                        <MonitorUp className="mr-2 h-4 w-4" />
+                        Selecionar
+                    </Button>
+                )}
             </DialogTrigger>
             <DialogContent 
                 onInteractOutside={(e) => {
