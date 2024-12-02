@@ -22,7 +22,7 @@ export function NewDesktop() {
     }
 
     return (
-      <div className="ml-60 p-4">
+      <div className="ml-64 p-4">
           <h1 className="text-2xl font-bold">Novo Desktop</h1>
           <hr className="border-muted/70 my-4" />
           <h2 className="text-lg font-semibold text-pretty mb-4">Selecione uma opção:</h2>
@@ -47,7 +47,7 @@ export function NewDesktop() {
                             <p className="text-sm text-muted-foreground">
                                 {desktop.autoApproved ? "Aprovado automaticamente" : "Necessita de aprovação de um administrador"}
                             </p>
-                            {desktop.autoApproved ? (<CreateDesktopDialog desktopOptionId={desktop.id} />) : (<CreateRequestDialog />)}
+                            {desktop.autoApproved ? (<CreateDesktopDialog desktopOptionId={desktop.id} />) : (<CreateRequestDialog desktopOptionId={desktop.id} />)}
                             
                         </div>
                       </CardFooter>

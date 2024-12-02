@@ -10,6 +10,7 @@ import { NewDesktop } from "./pages/new-desktop"
 import { DesktopOptions } from "./pages/desktop-options"
 import { MyDesktops } from "./pages/my-desktops"
 import { AccessDesktop } from "./pages/access-desktop"
+import { DesktopRequests } from "./pages/desktop-requests"
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
             {
                 path: "users",
                 element: <CanAccessRoute permission="VIEW_USERS"><ManageUsers /></CanAccessRoute>,
+            },
+            {
+                path: 'desktop-requests',
+                element: <DesktopRequests />,
             },
             {
                 path: "forbidden",

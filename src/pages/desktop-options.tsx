@@ -10,7 +10,7 @@ export function DesktopOptions() {
         queryKey: ['get-desktop-options'],
     })
     return (
-      <div className="ml-60 p-4">
+      <div className="ml-64 p-4">
           <h1 className="text-2xl font-bold">Gerenciar Opções de Desktop</h1>
           <hr className="border-muted/70 my-4" />
           <div className="px-8">

@@ -7,14 +7,17 @@ import { Button } from "../ui/button";
 import { MessageSquare } from "lucide-react";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
+import { createDesktopRequest } from "@/data/desktop-requests";
+import { toast } from "sonner";
+import { isAPIError } from "@/interfaces/errors";
 
 const requestSchema = z.object({
-    purpose: z.string().min(10, 'A descrição deve ter pelo menos 10 caracteres'),
+    objective: z.string().min(10, 'A descrição deve ter pelo menos 10 caracteres'),
 });
 
 type RequestFormData = z.infer<typeof requestSchema>;
 
-export function CreateRequestDialog() {
+export function CreateRequestDialog({ desktopOptionId }: { desktopOptionId: number }) {
     const [open, setOpen] = useState(false);
 
     const {
@@ -25,8 +28,34 @@ export function CreateRequestDialog() {
         resolver: zodResolver(requestSchema),
     });
 
-    const onSubmit = (data: RequestFormData) => {
-        console.log('Informações da Solicitação:', data);
+    const onSubmit = async (data: RequestFormData) => {
+        try {
+            await createDesktopRequest({ objective: data.objective, desktopOptionId });
+            setOpen(false);
+            toast.success('Solicitação enviada com sucesso!');
+        } catch (error) {
+            if(isAPIError(error)) {
+                toast.error("Erro ao enviar solicitação", {
+                    description: error.message,
+                    action: {
+                        label: "Fechar",
+                        onClick: () => {
+                            toast.dismiss()
+                        }
+                    }
+                })
+            } else {
+                toast.error("Erro inesperado", {
+                    description: "Algo deu errado. Tente novamente.",
+                    action: {
+                        label: "Fechar",
+                        onClick: () => {
+                            toast.dismiss()
+                        }
+                    }
+                })
+            }
+        }
     };
 
     return (
@@ -40,18 +69,18 @@ export function CreateRequestDialog() {
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>Informações da Solicitação</DialogTitle>
-                    <DialogDescription>Descreva o motivo para utilização desse desktop.</DialogDescription>
+                    <DialogDescription>Descreva o objetivo para utilização desse desktop.</DialogDescription>
                 </DialogHeader>
                 <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-2 gap-4 py-4">
                     <div className="grid w-full items-center gap-1.5 col-span-2">
                         <Label htmlFor="purpose">Motivo</Label>
                         <Textarea
-                            id="purpose"
+                            id="goal"
                             placeholder="Descreva o motivo..."
-                            {...register("purpose")}
+                            {...register("objective")}
                         />
-                        {errors.purpose && (
-                            <p className="text-red-500 text-sm">{errors.purpose.message}</p>
+                        {errors.objective && (
+                            <p className="text-red-500 text-sm">{errors.objective.message}</p>
                         )}
                     </div>
                     <DialogFooter className="col-span-2">

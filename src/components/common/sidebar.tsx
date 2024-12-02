@@ -13,7 +13,7 @@ export function Sidebar() {
 
     return (
       <div className="flex w-full flex-col bg-muted/40">
-        <aside className="fixed inset-y-0 left-0 z-10 w-60 border-r bg-background">
+        <aside className="fixed inset-y-0 left-0 z-10 w-66 border-r bg-background">
             <Link 
                 to="#"
                 className="flex items-center gap-4 py-6 px-6 text-muted-foreground hover:text-foreground"
@@ -57,11 +57,19 @@ export function Sidebar() {
                 </Link>
                 
                 <Link 
-                    to="desktop-options"
+                    to="/desktop-options"
                     className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
                     <MonitorCheck className="h-5 w-5" />
                     <span>Opções de Desktops</span>
+                </Link>
+
+                <Link 
+                    to="/desktop-requests"
+                    className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                >
+                    <ClipboardList className="h-5 w-5" />
+                    <span>Solicitações de Desktop</span>
                 </Link>
 
                 <Link 

@@ -2,19 +2,21 @@ import { DesktopDetailsDialog } from "@/components/my-desktops/desktop-details-d
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { useAuth } from "@/contexts/auth-context";
 import { getCloudReourceAccessToken, getUserCloudResources } from "@/data/cloud-resources";
 import { useQuery } from "@tanstack/react-query";
 import { Monitor, MonitorPlay } from "lucide-react";
 
 export function MyDesktops() {
+    const { token } = useAuth();
     const { data: myDesktops, isLoading, refetch } = useQuery({
         queryFn: getUserCloudResources,
-        queryKey: ['get-user-cloud-resources'],
+        queryKey: ['get-user-cloud-resources', token],
     });
 
     if (isLoading) {
         return (
-            <div className="flex ml-60 p-4 justify-center items-center h-screen">
+            <div className="flex ml-64 p-4 justify-center items-center h-screen">
                 <LoadingSpinner size={40} />
             </div>
         );
@@ -27,7 +29,7 @@ export function MyDesktops() {
     }
 
     return (
-        <div className="ml-60 p-4">
+        <div className="ml-64 p-4">
             <h1 className="text-2xl font-bold">Meus Desktops</h1>
             <hr className="border-muted/70 my-4" />
             <h2 className="text-lg font-semibold text-pretty mb-4">Acesse seus desktops:</h2>
