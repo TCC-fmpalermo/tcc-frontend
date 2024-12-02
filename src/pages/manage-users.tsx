@@ -46,7 +46,10 @@ export function ManageUsers() {
                                     <TableCell>{user.email}</TableCell>
                                     <TableCell>{user.role.alias}</TableCell>
                                     <TableCell>{user.createdAt}</TableCell>
-                                    <TableCell>{user.status}</TableCell>
+                                    <TableCell
+                                    className={user.status === 'Ativo' ? 'text-green-600' : 
+                                        user.status === 'Pendente' ? 'text-yellow-600' : 'text-red-600'}
+                                    >{user.status}</TableCell>
                                     <TableCell>
                                         <div className="flex items-center gap-1.5">
                                             <EditUserDialog user={user} onUserUpdated={refetch} />

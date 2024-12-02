@@ -1,13 +1,15 @@
 import { DeleteDesktopRequestDialog } from "@/components/desktop-requests/delete-desktop-request-dialog";
 import { DesktopRequestDetailsDialog } from "@/components/desktop-requests/desktop-request-details-dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { getDesktopRequests, getUserDesktopRequests } from "@/data/desktop-requests"
+import { useAuth } from "@/contexts/auth-context";
+import { getUserDesktopRequests } from "@/data/desktop-requests"
 import { useQuery } from "@tanstack/react-query"
 
 export function MyRequests() {
+    const { token } = useAuth();
     const { data: desktopRequests, refetch } = useQuery({
         queryFn: () => getUserDesktopRequests(),
-        queryKey: ['get-user-desktop-requests'],
+        queryKey: ['get-user-desktop-requests', token],
     });
     return (
       <div className="ml-64 p-4">
@@ -32,7 +34,6 @@ export function MyRequests() {
                         {desktopRequests?.map((desktopRequest) => (
                             <TableRow key={desktopRequest.id}>
                                 <TableCell>{desktopRequest.id}</TableCell>
-                                <TableCell>{desktopRequest.user.firstName + ' ' + desktopRequest.user.lastName}</TableCell>
                                 <TableCell>{desktopRequest.desktopOption.imageInfo.name}</TableCell>
                                 <TableCell>{desktopRequest.desktopOption.flavorSpecs.name}</TableCell>
                                 <TableCell>{desktopRequest.desktopOption.flavorSpecs.vcpus}</TableCell>
@@ -40,7 +41,10 @@ export function MyRequests() {
                                 <TableCell>{desktopRequest.desktopOption.size}</TableCell>
                                 <TableCell>{desktopRequest.requestedAt}</TableCell>
                                 <TableCell>{desktopRequest.finishedAt}</TableCell>
-                                <TableCell>{desktopRequest.status}</TableCell> 
+                                <TableCell
+                                    className={desktopRequest.status === 'Aprovado' ? 'text-green-600' : 
+                                    desktopRequest.status === 'Pendente' ? 'text-yellow-600' : 'text-red-600'}
+                                >{desktopRequest.status}</TableCell> 
                                 <TableCell>
                                     <div className="flex items-center gap-0.5">
                                         <DesktopRequestDetailsDialog details={desktopRequest} />

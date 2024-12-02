@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Desktops />,
+                element: <MyDesktops />,
             },
             {
                 path: "my-desktops",
@@ -37,6 +37,10 @@ export const router = createBrowserRouter([
             {
                 path: "desktop-options",
                 element: <DesktopOptions />
+            },
+            {
+                path: "desktops",
+                element: <Desktops />,
             },
             {
                 path: "users",

@@ -1,7 +1,10 @@
-import { ImageInfo } from "./desktop-options";
+import { FlavorsSpecs, ImageInfo } from "./desktop-options";
 
 export interface InstanceData {
     id: number;
+    name: string;
+    ipAddress: string;
+    flavorSpecs: FlavorsSpecs;
     cpus: string;
     ram: string;
 }
@@ -12,18 +15,24 @@ export interface VolumeData {
     imageInfo: ImageInfo;
 }
 
+export interface UserData {
+    id: number;
+    firstName: string;
+    lastName: string;
+}
+
 export interface GetCloudResourcesData {
     id: number;
     alias: string;
-    createdAt: Date;
-    updatedAt: Date;
-    deletedAt: Date | null;
-    lastAccessedAt: Date | null;
+    createdAt: string;
+    updatedAt: string;
+    deletedAt: string | null;
+    lastAccessedAt: string | null;
     status: string;
-    user: number;
     desktopOption: number;
     instance: InstanceData;
     volume: VolumeData;
+    user: UserData
 }
 
 export interface GetUserCloudResourcesData {

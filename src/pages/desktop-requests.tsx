@@ -39,7 +39,10 @@ export function DesktopRequests() {
                                 <TableCell>{desktopRequest.desktopOption.flavorSpecs.vcpus}</TableCell>
                                 <TableCell>{desktopRequest.desktopOption.flavorSpecs.ram}</TableCell>
                                 <TableCell>{desktopRequest.desktopOption.size}</TableCell>
-                                <TableCell>{desktopRequest.status}</TableCell> 
+                                <TableCell
+                                className={desktopRequest.status === 'Aprovado' ? 'text-green-600' : 
+                                    desktopRequest.status === 'Pendente' ? 'text-yellow-600' : 'text-red-600'}
+                                >{desktopRequest.status}</TableCell> 
                                 <TableCell>
                                     <div className="flex items-center gap-0.5">
                                         <DesktopRequestDetailsDialog details={desktopRequest} />

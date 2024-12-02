@@ -27,6 +27,13 @@ export const updateCloudResource = async (id: number, data: UpdateCloudResourceD
     })
 }
 
+export const updateCloudResourceStatus = async (id: number, status: string) => {
+    return apiRequest<UpdateCloudResourceData>(`/cloud-resources/${id}/status`, {
+        method: "PATCH",
+        body: { status }
+    })
+}
+
 export async function getCloudResourceProgress<T>(
     onMessage: (message: T) => void,
     onError?: (error: Error) => void
