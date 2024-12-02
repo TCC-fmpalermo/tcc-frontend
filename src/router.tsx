@@ -11,6 +11,7 @@ import { DesktopOptions } from "./pages/desktop-options"
 import { MyDesktops } from "./pages/my-desktops"
 import { AccessDesktop } from "./pages/access-desktop"
 import { DesktopRequests } from "./pages/desktop-requests"
+import { MyRequests } from "./pages/my-requests"
 
 export const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ export const router = createBrowserRouter([
             {
                 path: "my-desktops",
                 element: <MyDesktops />,
+            },
+            {
+                'path': "my-requests",
+                element: <MyRequests />
             },
             {
                 path: "new-desktop",
