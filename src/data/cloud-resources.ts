@@ -21,7 +21,7 @@ export const getCloudReourceAccessToken = async (id: number): Promise<GetCloudRe
 }
 
 export const updateCloudResource = async (id: number, data: UpdateCloudResourceData) => {
-    return apiRequest<UpdateCloudResourceData>(`/cloud-resources/${id}`, {
+    return apiRequest<UpdateCloudResourceData>(`/cloud-resources/${id}/alias`, {
         method: "PATCH",
         body: data
     })

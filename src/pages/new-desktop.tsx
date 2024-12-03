@@ -2,11 +2,13 @@ import { CreateDesktopDialog } from "@/components/new-desktop/create-desktop-dia
 import { CreateRequestDialog } from "@/components/new-desktop/create-request-dialog";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { useHasPermission } from "@/contexts/permission-context";
 import { getDesktopOptions } from "@/data/desktop-options";
 import { useQuery } from "@tanstack/react-query";
 import { Monitor } from "lucide-react";
 
 export function NewDesktop() {
+    const canCreateAnyCloudResource = useHasPermission("CREATE_ANY_CLOUD_RESOURCE");
     const status = "Ativo";
     const { data: desktopOptions, isLoading } = useQuery({
         queryFn: () => getDesktopOptions({ status }),
@@ -45,9 +47,9 @@ export function NewDesktop() {
                       <CardFooter>
                         <div className="grid grid-rows-2 w-full">
                             <p className="text-sm text-muted-foreground">
-                                {desktop.autoApproved ? "Aprovado automaticamente" : "Necessita de aprovação de um administrador"}
+                                {desktop.autoApproved || canCreateAnyCloudResource ? "Aprovado automaticamente" : "Necessita de aprovação de um administrador"}
                             </p>
-                            {desktop.autoApproved ? (<CreateDesktopDialog desktopOptionId={desktop.id} />) : (<CreateRequestDialog desktopOptionId={desktop.id} />)}
+                            {desktop.autoApproved || canCreateAnyCloudResource? (<CreateDesktopDialog desktopOptionId={desktop.id} />) : (<CreateRequestDialog desktopOptionId={desktop.id} />)}
                             
                         </div>
                       </CardFooter>

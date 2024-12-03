@@ -37,19 +37,19 @@ export const router = createBrowserRouter([
             },
             {
                 path: "desktop-options",
-                element: <DesktopOptions />
+                element: <CanAccessRoute permission="MANAGE_DESKTOP_OPTIONS"><DesktopOptions /></CanAccessRoute>
             },
             {
                 path: "desktops",
-                element: <Desktops />,
+                element: <CanAccessRoute permission="MANAGE_CLOUD_RESOURCES"><Desktops /></CanAccessRoute>,
             },
             {
                 path: "users",
-                element: <CanAccessRoute permission="VIEW_USERS"><ManageUsers /></CanAccessRoute>,
+                element: <CanAccessRoute permission="MANAGE_USERS"><ManageUsers /></CanAccessRoute>,
             },
             {
                 path: 'desktop-requests',
-                element: <DesktopRequests />,
+                element: <CanAccessRoute permission="MANAGE_DESKTOP_REQUESTS"><DesktopRequests /></CanAccessRoute>,
             },
             {
                 path: "forbidden",
