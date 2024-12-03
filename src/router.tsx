@@ -12,6 +12,7 @@ import { MyDesktops } from "./pages/my-desktops"
 import { AccessDesktop } from "./pages/access-desktop"
 import { DesktopRequests } from "./pages/desktop-requests"
 import { MyRequests } from "./pages/my-requests"
+import { SignUp } from "./pages/sign-up"
 
 export const router = createBrowserRouter([
     {
@@ -63,5 +64,9 @@ export const router = createBrowserRouter([
     {
         path: "/sign-in",
         element: <SignIn />
+    },
+    {
+        path: "/sign-up",
+        element: <SignUp />
     }
 ])

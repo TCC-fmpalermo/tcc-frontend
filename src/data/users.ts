@@ -1,4 +1,4 @@
-import { CreateUserData, GetUsersFilters, GetUserData, UpdateUserData } from "@/interfaces/users";
+import { CreateUserData, GetUsersFilters, GetUserData, UpdateUserData, UpdatePersonalInformation } from "@/interfaces/users";
 import { apiRequest } from "./api";
 
 export const getUsers = async ({ search, role, status }: GetUsersFilters): Promise<GetUserData[]> => {
@@ -23,6 +23,17 @@ export const updateUser = async (id: number, user: UpdateUserData): Promise<GetU
         method: "PATCH",
         body: user,
     });
+}
+
+export const getPersonalInformation = async (): Promise<GetUserData> => {
+    return apiRequest<GetUserData>("/users/me");
+}
+
+export const updatePersonalInformation = async (user: UpdatePersonalInformation): Promise<GetUserData> => {
+    return apiRequest<GetUserData>("/users/me", {
+        method: "PATCH",
+        body: user,
+    })
 }
 
 export const getUserStatusOptions = async (): Promise<string[]> => {

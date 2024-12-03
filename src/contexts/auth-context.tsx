@@ -1,14 +1,17 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from "react";
 import {jwtDecode} from "jwt-decode";
-import { set } from "react-hook-form";
+
 export interface DecodedToken {
-  permissions: string[];
-  id: number;
-  exp: number;
+  permissions?: string[];
+  id?: number;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  exp?: number;
 }
 interface AuthContextType {
   token: string | null;
-  userData: DecodedToken | null;
+  userData: DecodedToken;
   setToken: (token: string) => void;
   clearToken: () => void;
   isValidToken: () => boolean;
@@ -22,13 +25,20 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [token, setTokenState] = useState<string | null>("loading");
-  const [userData, setUserData] = useState(null);
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     const storedToken = localStorage.getItem("authToken");
     if (storedToken) {
       setTokenState(storedToken);
-      setUserData(jwtDecode(storedToken));
+      const decoded: DecodedToken = jwtDecode(storedToken);
+      
+      setUserData({
+        id: decoded.id,
+        firstName: decoded.firstName,
+        lastName: decoded.lastName,
+        email: decoded.email,
+      });
     } else {
       setTokenState(null);
     }
@@ -36,13 +46,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const setToken = (token: string) => {
     setTokenState(token);
-    setUserData(jwtDecode(token));
+    const decoded: DecodedToken = jwtDecode(token);
+      
+      setUserData({
+        id: decoded.id,
+        firstName: decoded.firstName,
+        lastName: decoded.lastName,
+        email: decoded.email,
+      });
     localStorage.setItem("authToken", token);
   };
 
   const clearToken = () => {
     setTokenState(null);
-    setUserData(null);
+    setUserData({});
     localStorage.removeItem("authToken");
   };
 
@@ -52,6 +69,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const decoded: DecodedToken = jwtDecode(token);
       
       const now = Math.floor(Date.now() / 1000);
+
+      if (decoded.exp === undefined) return false;
       
       return decoded.exp > now;
     } catch (error) {

@@ -1,6 +1,7 @@
 import { useAuth } from "@/contexts/auth-context";
-import { ClipboardList, LogOut, Monitor, MonitorCheck, MonitorCog, MonitorUp, User, Users } from "lucide-react";
+import { ClipboardList, LogOut, Monitor, MonitorCheck, MonitorCog, MonitorUp, Users } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { EditPersonalInformationDialog } from "../users/edit-personal-information-dialog";
 
 export function Sidebar() {
     const { clearToken } = useAuth();
@@ -14,13 +15,7 @@ export function Sidebar() {
     return (
       <div className="flex w-full flex-col bg-muted/40">
         <aside className="fixed inset-y-0 left-0 z-10 w-66 border-r bg-background">
-            <Link 
-                to="#"
-                className="flex items-center gap-4 py-6 px-6 text-muted-foreground hover:text-foreground"
-            >
-                <User className="h-5 w-5" />
-                <span>Minha Conta</span>
-            </Link>
+            <EditPersonalInformationDialog />
             <hr className="border-muted/70 mb-4" />
             <nav className="grid gap-4 px-4 grow">
                 <h3> Acesso Rápido </h3>

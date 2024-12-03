@@ -53,7 +53,7 @@ export function SignIn() {
                             Acesse sua conta
                         </h1>
                     </CardTitle>
-                    <CardDescription className="text-center">Ou crie uma nova conta</CardDescription>
+                    <CardDescription className="text-center"><a href="/sign-up" className="underline-offset-2 hover:underline">Ou crie uma nova conta</a></CardDescription>
                 </CardHeader>
                 <form onSubmit={handleSubmit(handleSignIn)}>
                     <CardContent>

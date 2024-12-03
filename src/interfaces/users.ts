@@ -6,6 +6,13 @@ export interface GetUsersFilters {
     status: string | null;
 }
 
+export interface RegisterUserData {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+}
+
 export interface CreateUserData {
     firstName: string;
     lastName: string;
@@ -30,4 +37,12 @@ export interface UpdateUserData {
     email: string;
     role: string;
     status: string;
+}
+
+export interface UpdatePersonalInformation {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password?: string;
+    confirmPassword?: string;
 }
