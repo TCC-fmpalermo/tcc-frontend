@@ -1,9 +1,9 @@
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { ReceiptText } from "lucide-react";
-import { GetCloudResourcesData } from "@/interfaces/cloud-resources";
+import { GetDesktopsData } from "@/interfaces/desktops";
 
-export function CloudResourceDetailsDialog({ details }: { details: GetCloudResourcesData }) {
+export function DesktopDetailsDialog({ details }: { details: GetDesktopsData }) {
     return (
         <Dialog>
             <DialogTrigger asChild>

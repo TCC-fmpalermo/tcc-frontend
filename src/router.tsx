@@ -41,7 +41,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "desktops",
-                element: <CanAccessRoute permission="MANAGE_CLOUD_RESOURCES"><Desktops /></CanAccessRoute>,
+                element: <CanAccessRoute permission="MANAGE_DESKTOPS"><Desktops /></CanAccessRoute>,
             },
             {
                 path: "users",

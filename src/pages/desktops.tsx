@@ -1,14 +1,14 @@
-import { CloudResourceDetailsDialog } from "@/components/cloud-resources/cloud-resource-details-dialog"
-import { DisableCloudResourceDialog } from "@/components/cloud-resources/disable-cloud-resource-dialog"
-import { EnableCloudResourceDialog } from "@/components/cloud-resources/enable-cloud-resource-dialog"
+import { DesktopDetailsDialog } from "@/components/desktops/desktop-details-dialog"
+import { DisableDesktopDialog } from "@/components/desktops/disable-desktop-dialog"
+import { EnableDesktopDialog } from "@/components/desktops/enable-desktop-dialog"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { getCloudResources } from "@/data/cloud-resources"
+import { getDesktops } from "@/data/desktops"
 import { useQuery } from "@tanstack/react-query"
 
 export function Desktops() {
-  const { data: cloudResources, refetch } = useQuery({
-    queryFn: () => getCloudResources(),
-    queryKey: ['get-cloud-resources'],
+  const { data: desktops, refetch } = useQuery({
+    queryFn: () => getDesktops(),
+    queryKey: ['get-desktops'],
   })
 
     return (
@@ -30,26 +30,26 @@ export function Desktops() {
                         <TableHead>Ações</TableHead>
                     </TableHeader>
                     <TableBody>
-                        {cloudResources?.map((cloudResource) => (
-                            <TableRow key={cloudResource.id}>
-                                <TableCell>{cloudResource.id}</TableCell>
-                                <TableCell>{cloudResource.alias}</TableCell>
-                                <TableCell>{cloudResource.instance.name}</TableCell>
-                                <TableCell>{cloudResource.instance.ipAddress}</TableCell>
-                                <TableCell>{cloudResource.volume.imageInfo.name}</TableCell>
-                                <TableCell>{cloudResource.instance.flavorSpecs.name}</TableCell>
-                                <TableCell>{cloudResource.volume.size}</TableCell>
+                        {desktops?.map((desktop) => (
+                            <TableRow key={desktop.id}>
+                                <TableCell>{desktop.id}</TableCell>
+                                <TableCell>{desktop.alias}</TableCell>
+                                <TableCell>{desktop.instance.name}</TableCell>
+                                <TableCell>{desktop.instance.ipAddress}</TableCell>
+                                <TableCell>{desktop.volume.imageInfo.name}</TableCell>
+                                <TableCell>{desktop.instance.flavorSpecs.name}</TableCell>
+                                <TableCell>{desktop.volume.size}</TableCell>
                                 <TableCell
-                                    className={cloudResource.status === 'Ativo' ? 'text-green-600' : 'text-red-600'}
-                                >{cloudResource.status}</TableCell> 
+                                    className={desktop.status === 'Ativo' ? 'text-green-600' : 'text-red-600'}
+                                >{desktop.status}</TableCell> 
                                 <TableCell>
                                     <div className="flex items-center gap-0.5">
-                                        <CloudResourceDetailsDialog details={cloudResource} />
-                                        {cloudResource.status === 'Ativo' && (
-                                            <DisableCloudResourceDialog cloudResourceId={cloudResource.id} onDisable={refetch} />
+                                        <DesktopDetailsDialog details={desktop} />
+                                        {desktop.status === 'Ativo' && (
+                                            <DisableDesktopDialog desktopId={desktop.id} onDisable={refetch} />
                                         )}
-                                        {cloudResource.status === 'Inativo' && (
-                                            <EnableCloudResourceDialog cloudResourceId={cloudResource.id} onEnable={refetch} />
+                                        {desktop.status === 'Inativo' && (
+                                            <EnableDesktopDialog desktopId={desktop.id} onEnable={refetch} />
                                         )}
                                     </div>
                                 </TableCell>

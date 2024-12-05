@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Monitor } from "lucide-react";
 
 export function NewDesktop() {
-    const canCreateAnyCloudResource = useHasPermission("CREATE_ANY_CLOUD_RESOURCE");
+    const canCreateAnyDesktop = useHasPermission("CREATE_ANY_DESKTOP");
     const status = "Ativo";
     const { data: desktopOptions, isLoading } = useQuery({
         queryFn: () => getDesktopOptions({ status }),
@@ -47,9 +47,9 @@ export function NewDesktop() {
                       <CardFooter>
                         <div className="grid grid-rows-2 w-full">
                             <p className="text-sm text-muted-foreground">
-                                {desktop.autoApproved || canCreateAnyCloudResource ? "Aprovado automaticamente" : "Necessita de aprovação de um administrador"}
+                                {desktop.autoApproved || canCreateAnyDesktop ? "Aprovado automaticamente" : "Necessita de aprovação de um administrador"}
                             </p>
-                            {desktop.autoApproved || canCreateAnyCloudResource? (<CreateDesktopDialog desktopOptionId={desktop.id} />) : (<CreateRequestDialog desktopOptionId={desktop.id} />)}
+                            {desktop.autoApproved || canCreateAnyDesktop? (<CreateDesktopDialog desktopOptionId={desktop.id} />) : (<CreateRequestDialog desktopOptionId={desktop.id} />)}
                             
                         </div>
                       </CardFooter>

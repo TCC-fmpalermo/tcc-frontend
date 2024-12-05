@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { updateCloudResource } from "@/data/cloud-resources";
+import { updateDesktop } from "@/data/desktops";
 
 const editAliasSchema = z.object({
     alias: z.string().min(1, "O apelido é obrigatório"),
@@ -16,7 +16,7 @@ const editAliasSchema = z.object({
 
 type EditAliasFormValues = z.infer<typeof editAliasSchema>;
 
-export function EditDesktopAliasDialog({ cloudResourceId, alias, onAliasUpdated }: { cloudResourceId: number, alias: string; onAliasUpdated: () => void }) {
+export function EditDesktopAliasDialog({ desktopId, alias, onAliasUpdated }: { desktopId: number, alias: string; onAliasUpdated: () => void }) {
     const [open, setOpen] = useState(false);
 
     const {
@@ -30,7 +30,7 @@ export function EditDesktopAliasDialog({ cloudResourceId, alias, onAliasUpdated 
 
     const onSubmit = async (data: EditAliasFormValues) => {
         try {
-            await updateCloudResource(cloudResourceId, data);
+            await updateDesktop(desktopId, data);
             onAliasUpdated();
             toast.success("Apelido atualizado com sucesso!");
             setOpen(false);

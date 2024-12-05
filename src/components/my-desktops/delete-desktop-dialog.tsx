@@ -3,10 +3,10 @@ import { Button } from "../ui/button";
 import { Trash } from "lucide-react";
 import { toast } from "sonner";
 import { isAPIError } from "@/interfaces/errors";
-import { deleteCloudResource } from "@/data/cloud-resources";
+import { deleteDesktop } from "@/data/desktops";
 import { useState } from "react";
 
-export function DeleteDesktopDialog({ cloudResourceId, onDelete }: { cloudResourceId: number, onDelete: () => void }) {
+export function DeleteDesktopDialog({ desktopId, onDelete }: { desktopId: number, onDelete: () => void }) {
     const [open, setOpen] = useState(false);
     const [disabled, setDisabled] = useState(false);
 
@@ -21,7 +21,7 @@ export function DeleteDesktopDialog({ cloudResourceId, onDelete }: { cloudResour
     const onSubmit = async () => {
         try {
             setDisabled(true);
-            await deleteCloudResource(cloudResourceId);
+            await deleteDesktop(desktopId);
             setDisabled(false);
             toast.success('Desktop deletado com sucesso!');
             onDelete();

@@ -2,9 +2,9 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Button } from "../ui/button";
 import { ReceiptText } from "lucide-react";
 import { EditDesktopAliasDialog } from "./edit-desktop-alias-dialog";
-import { GetUserCloudResourcesData } from "@/interfaces/cloud-resources";
+import { GetUserDesktopsData } from "@/interfaces/desktops";
 
-export function DesktopDetailsDialog({ details, onAliasUpdated }: { details: GetUserCloudResourcesData, onAliasUpdated: () => void }) {
+export function DesktopDetailsDialog({ details, onAliasUpdated }: { details: GetUserDesktopsData, onAliasUpdated: () => void }) {
     return (
         <Dialog>
             <DialogTrigger asChild>
@@ -55,7 +55,7 @@ export function DesktopDetailsDialog({ details, onAliasUpdated }: { details: Get
                     </div>
                 </div>
                 <DialogFooter>
-                    <EditDesktopAliasDialog cloudResourceId={details.id} alias={details.alias} onAliasUpdated={() => onAliasUpdated()} />
+                    <EditDesktopAliasDialog desktopId={details.id} alias={details.alias} onAliasUpdated={() => onAliasUpdated()} />
                 </DialogFooter>
             </DialogContent>
         </Dialog>

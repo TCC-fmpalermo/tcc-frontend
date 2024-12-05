@@ -11,7 +11,7 @@ import { Progress } from "../ui/progress";
 import { toast } from "sonner";
 import { isAPIError } from "@/interfaces/errors";
 import { Link } from "react-router-dom";
-import { createCloudResource, getCloudResourceProgress } from "@/data/cloud-resources";
+import { createDesktop, getDesktopProgress } from "@/data/desktops";
 
 const desktopSchema = z.object({
     alias: z.string().min(1, 'Apelido é obrigatório'),
@@ -48,7 +48,7 @@ export function CreateDesktopDialog({ desktopOptionId, iconOption = false }: { d
         let closeConnection: (() => void) | undefined;
 
         const fetchProgress = async () => {
-            closeConnection = await getCloudResourceProgress<{ progress: number; message: string }>(
+            closeConnection = await getDesktopProgress<{ progress: number; message: string }>(
               (data) => {
                 setProgress(data.progress);
                 setStatusProgress(data.message);
@@ -71,7 +71,7 @@ export function CreateDesktopDialog({ desktopOptionId, iconOption = false }: { d
             setListenProgress(true);
             await new Promise(resolve => setTimeout(resolve, 1000));
 
-            await createCloudResource({
+            await createDesktop({
                 alias: data.alias,
                 desktopOptionId: desktopOptionId
             });

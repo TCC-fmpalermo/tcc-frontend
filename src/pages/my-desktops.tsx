@@ -4,15 +4,15 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useAuth } from "@/contexts/auth-context";
-import { getCloudReourceAccessToken, getUserCloudResources } from "@/data/cloud-resources";
+import { getDesktopAccessToken, getUserDesktops } from "@/data/desktops";
 import { useQuery } from "@tanstack/react-query";
 import { Monitor, MonitorPlay } from "lucide-react";
 
 export function MyDesktops() {
     const { token } = useAuth();
     const { data: myDesktops, isLoading, refetch } = useQuery({
-        queryFn: getUserCloudResources,
-        queryKey: ['get-user-cloud-resources', token],
+        queryFn: getUserDesktops,
+        queryKey: ['get-user-desktops', token],
     });
 
     if (isLoading) {
@@ -23,8 +23,8 @@ export function MyDesktops() {
         );
     }
 
-    const handleAccessDesktop = async (cloudResourceId: number) => {
-        const { token } = await getCloudReourceAccessToken(cloudResourceId);
+    const handleAccessDesktop = async (desktopId: number) => {
+        const { token } = await getDesktopAccessToken(desktopId);
 
         window.open(`/access-desktop?token=${token}`, '_blank');
     }
@@ -37,7 +37,7 @@ export function MyDesktops() {
             <div className="flex flex-wrap justify-center items-center gap-6 w-full mx-auto">
                 {myDesktops?.map((desktop) => (    
                     <Card key={desktop.id} className="relative my-4 p-4 w-full sm:w-1/2 md:w-1/3 max-w-lg">
-                        <DeleteDesktopDialog cloudResourceId={desktop.id} onDelete={refetch} />
+                        <DeleteDesktopDialog desktopId={desktop.id} onDelete={refetch} />
                         <CardHeader className="flex items-center justify-between">
                             <CardTitle className="text-lg font-semibold">
                                 {desktop.alias}

@@ -6,7 +6,7 @@ import { useHasPermission } from "@/contexts/permission-context";
 
 export function Sidebar() {
     const { clearToken } = useAuth();
-    const canManageCloudResources = useHasPermission("MANAGE_CLOUD_RESOURCES");
+    const canManageDesktops = useHasPermission("MANAGE_DESKTOPS");
     const canManageUsers = useHasPermission("MANAGE_USERS");
     const canManageDesktopOptions = useHasPermission("MANAGE_DESKTOP_OPTIONS");
     const canManageDesktopRequests = useHasPermission("MANAGE_DESKTOP_REQUESTS");
@@ -51,10 +51,10 @@ export function Sidebar() {
                         <span>Minhas Solicitações</span>
                     </Link>
                 )}
-                {(canManageCloudResources || canManageDesktopOptions || canManageDesktopRequests || canManageUsers) && (
+                {(canManageDesktops || canManageDesktopOptions || canManageDesktopRequests || canManageUsers) && (
                     <h3 className="py-2"> Administração </h3>
                 )}
-                {canManageCloudResources && (
+                {canManageDesktops && (
                     <Link 
                         to="/desktops"
                         className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"

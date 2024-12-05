@@ -1,20 +1,20 @@
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
-import { MonitorUp } from "lucide-react";
+import { MonitorDown } from "lucide-react";
 import { toast } from "sonner";
 import { isAPIError } from "@/interfaces/errors";
-import { updateCloudResourceStatus } from "@/data/cloud-resources";
+import { updateDesktopStatus } from "@/data/desktops";
 
-export function EnableCloudResourceDialog({ cloudResourceId, onEnable }: { cloudResourceId: number, onEnable: () => void }) {
+export function DisableDesktopDialog({ desktopId, onDisable }: { desktopId: number, onDisable: () => void }) {
 
     const onSubmit = async () => {
         try {
-            await updateCloudResourceStatus(cloudResourceId, 'Ativo');
-            toast.success('Instância ativada com sucesso!');
-            onEnable();
+            await updateDesktopStatus(desktopId, 'Inativo');
+            toast.success('Instância desativada com sucesso!');
+            onDisable();
         } catch (error) {
             if(isAPIError(error)) {
-                toast.error("Erro ao ativar instância", {
+                toast.error("Erro ao desativar instância", {
                     description: error.message,
                     action: {
                         label: "Fechar",
@@ -40,22 +40,22 @@ export function EnableCloudResourceDialog({ cloudResourceId, onEnable }: { cloud
         <Dialog>
             <DialogTrigger asChild>
                 <Button variant="ghost">
-                    <MonitorUp className="mr-2 h-4 w-4" />
+                    <MonitorDown className="mr-2 h-4 w-4" />
                 </Button>
             </DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Ativar Instância</DialogTitle>
+                    <DialogTitle>Desativar Instância</DialogTitle>
                 </DialogHeader>
                 <div className="text-gray-700">
-                    Você tem certeza que deseja ativar esta instância?
+                    Você tem certeza que deseja desativar esta instância?
                 </div>
                 <DialogFooter>
                     <Button variant="ghost" onClick={() => document.dispatchEvent(new Event('dialog-close'))}>
                         Cancelar
                     </Button>
                     <Button onClick={onSubmit}>
-                        Ativar
+                        Desativar
                     </Button>
                 </DialogFooter>
             </DialogContent>

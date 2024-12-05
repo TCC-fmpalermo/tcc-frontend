@@ -21,7 +21,7 @@ export interface UserData {
     lastName: string;
 }
 
-export interface GetCloudResourcesData {
+export interface GetDesktopsData {
     id: number;
     alias: string;
     createdAt: string;
@@ -35,7 +35,7 @@ export interface GetCloudResourcesData {
     user: UserData
 }
 
-export interface GetUserCloudResourcesData {
+export interface GetUserDesktopsData {
     id: number;
     alias: string;
     createdAt: string;
@@ -46,15 +46,15 @@ export interface GetUserCloudResourcesData {
     volume: VolumeData;
 }
 
-export interface GetCloudResourceAccessTokenData {
+export interface GetDesktopAccessTokenData {
     token: string;
 }
 
-export interface CreateCloudResourceData {
+export interface CreateDesktopData {
     alias: string;
     desktopOptionId: number;
 }
 
-export interface UpdateCloudResourceData {
+export interface UpdateDesktopData {
     alias: string;
 }
